@@ -1,0 +1,301 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   SOLMIND AI design tokens (Master Prompt, Part 4).
+   Tailwind turns each --color-* into utilities: bg-surface, text-muted…
+------------------------------------------------------------------- */
+/* Colour tokens read CSS variables, so one class works in both themes.
+   Dark values are the original SOLMIND AI theme, unchanged. */
+@theme inline {
+  --color-base: var(--c-base);
+  --color-base-2: var(--c-base-2);
+  --color-surface: var(--c-surface);
+  --color-elevated: var(--c-elevated);
+  --color-purple: var(--c-purple);
+  --color-purple-deep: var(--c-purple-deep);
+  --color-blue: var(--c-blue);
+  --color-blue-deep: var(--c-blue-deep);
+  --color-cyan: var(--c-cyan);
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-neutral: #64748b;
+  --color-text: var(--c-text);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  /* overlay colour: white on dark, deep indigo on light */
+  --color-ink: var(--c-ink);
+  /* readable accent text */
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-accent-softer: var(--c-accent-softer);
+  --color-ok-ink: var(--c-ok-ink);
+  --color-bad-ink: var(--c-bad-ink);
+  --color-warn-ink: var(--c-warn-ink);
+  --color-cyan-ink: var(--c-cyan-ink);
+  --color-blue-soft: var(--c-blue-soft);
+  --color-cyan-soft: var(--c-cyan-soft);
+  --color-bad-soft: var(--c-bad-soft);
+  --color-ok-soft: var(--c-ok-soft);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  --shadow-panel: var(--c-shadow-panel);
+  --shadow-glow: var(--c-shadow-glow);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root,
+:root[data-theme="dark"] {
+  /* ---- Dark: the original SOLMIND AI theme ---- */
+  --c-base: #080b16;
+  --c-base-2: #0e1424;
+  --c-surface: #121b2e;
+  --c-elevated: #18243a;
+  --c-purple: #8b5cf6;
+  --c-purple-deep: #7c3aed;
+  --c-blue: #3b82f6;
+  --c-blue-deep: #2563eb;
+  --c-cyan: #22d3ee;
+  --c-text: #f8fafc;
+  --c-muted: #94a3b8;
+  --c-line: rgb(148 163 184 / 0.15);
+  --c-line-strong: rgb(148 163 184 / 0.28);
+  --c-ink: #ffffff;
+  --c-accent: #a78bfa;
+  --c-accent-soft: #c4b5fd;
+  --c-accent-softer: #ddd6fe;
+  --c-ok-ink: #4ade80;
+  --c-bad-ink: #f87171;
+  --c-warn-ink: #fbbf24;
+  --c-cyan-ink: #22d3ee;
+  --c-blue-soft: #93c5fd;
+  --c-cyan-soft: #67e8f9;
+  --c-bad-soft: #fca5a5;
+  --c-ok-soft: #86efac;
+  --c-ink-mastered: #16a34a;
+  --c-ink-developing: #f59e0b;
+  --c-ink-weak: #ef4444;
+  --c-ink-not-assessed: #64748b;
+  --c-target-ink: #22d3ee;
+  --c-shadow-panel: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 20px 40px -24px rgb(0 0 0 / 0.6);
+  --c-shadow-glow: 0 0 0 1px rgb(139 92 246 / 0.35), 0 12px 32px -12px rgb(124 58 237 / 0.55);
+  --c-glass: rgb(18 27 46 / 0.62);
+  --c-grid: rgb(148 163 184 / 0.06);
+  --c-text-gradient: linear-gradient(120deg, #c4b5fd 0%, #93c5fd 55%, #67e8f9 100%);
+  --c-glow-a: rgb(124 58 237 / 0.35);
+  --c-glow-b: rgb(37 99 235 / 0.15);
+  --c-glow-c: rgb(124 58 237 / 0.45);
+  --c-selection: rgb(139 92 246 / 0.4);
+  --c-flow-bg: transparent;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  /* ---- Light: the same brand on clean, readable surfaces ---- */
+  --c-base: #f6f7fc;
+  --c-base-2: #eef0f9;
+  --c-surface: #ffffff;
+  --c-elevated: #f0eefb;
+  --c-purple: #7657e8;
+  --c-purple-deep: #6546d6;
+  --c-blue: #6489ed;
+  --c-blue-deep: #4f74db;
+  --c-cyan: #45bfd0;
+  --c-text: #25213d;
+  --c-muted: #5f5a78;
+  --c-line: #e3e5ef;
+  --c-line-strong: #d1d4e4;
+  --c-ink: #302858;
+  --c-accent: #7657e8;
+  --c-accent-soft: #6546d6;
+  --c-accent-softer: #5b45c9;
+  --c-ok-ink: #15803d;
+  --c-bad-ink: #dc2626;
+  --c-warn-ink: #b45309;
+  --c-cyan-ink: #0f7685;
+  --c-blue-soft: #4a6fd6;
+  --c-cyan-soft: #0f7685;
+  --c-bad-soft: #dc2626;
+  --c-ok-soft: #15803d;
+  --c-ink-mastered: #15803d;
+  --c-ink-developing: #b45309;
+  --c-ink-weak: #dc2626;
+  --c-ink-not-assessed: #526077;
+  --c-target-ink: #0f7685;
+  --c-shadow-panel: 0 1px 2px rgb(37 33 61 / 0.06), 0 14px 32px -22px rgb(37 33 61 / 0.28);
+  --c-shadow-glow: 0 0 0 1px rgb(118 87 232 / 0.25), 0 12px 28px -12px rgb(118 87 232 / 0.45);
+  --c-glass: rgb(255 255 255 / 0.85);
+  --c-grid: rgb(118 87 232 / 0.07);
+  --c-text-gradient: linear-gradient(120deg, #7657e8 0%, #6489ed 55%, #2fa9bb 100%);
+  --c-glow-a: rgb(118 87 232 / 0.16);
+  --c-glow-b: rgb(117 217 229 / 0.16);
+  --c-glow-c: rgb(117 217 229 / 0.35);
+  --c-selection: rgb(118 87 232 / 0.22);
+  --c-flow-bg: #f4f3fb;
+  color-scheme: light;
+}
+
+:root {
+  --gradient-primary: linear-gradient(135deg, #7c3aed, #2563eb);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --header-height: 64px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 16px);
+}
+
+body {
+  background: var(--color-base);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--c-selection);
+}
+
+/* ---- Reusable surfaces ------------------------------------------ */
+@utility panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-panel);
+}
+
+@utility glass {
+  background: var(--c-glass);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+@utility text-gradient {
+  background: var(--c-text-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--c-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--c-grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* KaTeX: inherit the page colour and keep long formulas scrollable */
+.katex {
+  font-size: 1.08em;
+  color: inherit;
+}
+.katex-display {
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- Knowledge map (React Flow) -------------------------------- */
+.react-flow.solmind-flow {
+  --xy-background-color: var(--c-flow-bg);
+  --xy-attribution-background-color: transparent;
+}
+.solmind-flow .react-flow__attribution {
+  opacity: 0.45;
+  font-size: 10px;
+}
+.solmind-flow .react-flow__attribution a {
+  color: var(--color-muted);
+}
+.solmind-flow .react-flow__node {
+  cursor: pointer;
+}
+.edge-flow {
+  stroke-dasharray: 5 9;
+  animation: edge-flow 0.9s linear infinite;
+}
+@keyframes edge-flow {
+  to {
+    stroke-dashoffset: -14;
+  }
+}
+
+/* ---- Bangla -------------------------------------------------------
+   Latin text, digits, units and formulas keep Geist; Bengali letters fall
+   through to Hind Siliguri. Bengali needs more line height for vowel signs
+   and conjuncts, and no negative letter-spacing. English is untouched. */
+html[lang="bn"] {
+  --font-sans: var(--font-geist-sans), "Hind Siliguri", "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "Hind Siliguri", "Noto Sans Bengali", ui-monospace, monospace;
+}
+html[lang="bn"] body {
+  line-height: 1.75;
+}
+html[lang="bn"] h1,
+html[lang="bn"] h2,
+html[lang="bn"] h3 {
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+html[lang="bn"] [class*="tracking-"] {
+  letter-spacing: 0;
+}
+html[lang="bn"] [class*="leading-tight"],
+html[lang="bn"] [class*="leading-snug"] {
+  line-height: 1.45;
+}
+
+/* ---- Theme switch: colours ease for a moment, nothing else moves ---- */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition-property: background-color, color, border-color, fill, stroke, box-shadow !important;
+  transition-duration: 0.22s !important;
+  transition-timing-function: ease !important;
+}
